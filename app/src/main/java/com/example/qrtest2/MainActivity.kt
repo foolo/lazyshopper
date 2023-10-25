@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         val bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
         return InputImage.fromBitmap(bitmap, 0)
     }
-    
+
     private fun startScan() {
         val image = getInputImage()
 
