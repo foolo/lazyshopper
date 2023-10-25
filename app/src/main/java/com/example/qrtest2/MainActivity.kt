@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.common.InputImage
 
 class MainActivity : AppCompatActivity() {
     private lateinit var scanner: BarcodeScanner
@@ -22,8 +23,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun getInputImage(): InputImage {
+        // TODO: Replace with actual image source
+        val bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+        return InputImage.fromBitmap(bitmap, 0)
+    }
+    
     private fun startScan() {
-        // Assuming a method to get the InputImage instance
         val image = getInputImage()
 
         scanner.process(image)
