@@ -14,12 +14,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnScanEan = findViewById<Button>(R.id.btn_scan_ean)
-        btnScanEan.setOnClickListener {
-            scanCode()
-        }
-    }
-
     private fun handleScanCompleted(code: String?, barcodeValue: TextView) {
         val barcodeValue = findViewById<TextView>(R.id.barcode_value)
         barcodeValue.text = code
@@ -51,4 +45,3 @@ class MainActivity : AppCompatActivity() {
                 handleScanFailed()
             }
     }
-}
