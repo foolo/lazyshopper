@@ -1,9 +1,6 @@
 package com.example.qrtest2
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -23,7 +20,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun scanCode() {
+    private fun handleScanCompleted(code: String?, barcodeValue: TextView) {
+        val barcodeValue = findViewById<TextView>(R.id.barcode_value)
+        barcodeValue.text = code
+    }
+
+    private fun handleScanFailed() {
+        Toast.makeText(this, "Barcode scanning failed", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun scanCode() {
         val options = GmsBarcodeScannerOptions.Builder()
             .setBarcodeFormats(Barcode.FORMAT_EAN_13)
             .build()
@@ -31,14 +37,18 @@ class MainActivity : AppCompatActivity() {
         val barcodeValue = findViewById<TextView>(R.id.barcode_value)
         scanner.startScan()
             .addOnSuccessListener { barcode ->
-                val rawValue: String? = barcode.rawValue
-                barcodeValue.text = rawValue
+                if (barcode.rawValue != null) {
+                    handleScanCompleted(barcode.rawValue, barcodeValue)
+                }
+                else {
+                    handleScanFailed()
+                }
             }
             .addOnCanceledListener {
-                barcodeValue.text = "Scan Cancelled"
+                barcodeValue.text = "Scan cancelled"
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Barcode scanning failed", Toast.LENGTH_SHORT).show()
+                handleScanFailed()
             }
     }
 }
