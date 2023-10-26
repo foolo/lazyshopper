@@ -33,10 +33,6 @@ class MainActivity : AppCompatActivity() {
             .addOnSuccessListener { barcode ->
                 val rawValue: String? = barcode.rawValue
                 barcodeValue.text = rawValue
-                if(barcode.valueType == Barcode.TYPE_URL) {
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(rawValue))
-                    startActivity(browserIntent)
-                }
             }
             .addOnCanceledListener {
                 barcodeValue.text = "Scan Cancelled"
