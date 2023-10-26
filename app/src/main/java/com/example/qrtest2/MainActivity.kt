@@ -25,9 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     fun scanCode() {
         val options = GmsBarcodeScannerOptions.Builder()
-            .setBarcodeFormats(
-                Barcode.FORMAT_QR_CODE,
-                Barcode.FORMAT_EAN_13)
+            .setBarcodeFormats(Barcode.FORMAT_EAN_13)
             .build()
         val scanner = GmsBarcodeScanning.getClient(this, options)
         val barcodeValue = findViewById<TextView>(R.id.barcode_value)
